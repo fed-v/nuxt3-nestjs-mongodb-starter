@@ -1,4 +1,3 @@
-// server/api/fetchData.ts
 export default defineEventHandler(async () => {
 
   const config = useRuntimeConfig();
