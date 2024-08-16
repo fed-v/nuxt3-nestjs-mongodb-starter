@@ -29,7 +29,7 @@ FROM dependencies as development
 COPY . .
 
 # Expose the port
-EXPOSE 3001
+EXPOSE 4000
 
 # Run the application
 CMD [ "npm", "run", "start:dev" ]

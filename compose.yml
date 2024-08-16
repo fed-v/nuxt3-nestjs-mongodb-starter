@@ -8,9 +8,9 @@ services:
   nestjs:
     build: ./server
     ports:
-      - "3001:3001"
-    environment:
-      - DB_URL=mongodb://db:27017/mydatabase
+      - "4000:4000"
+    env_file: 
+      - ./server/.env-docker  # Use the Docker-specific environment file
     restart: on-failure
     depends_on:
       - db
