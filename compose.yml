@@ -1,7 +1,10 @@
 services:
 
   web:
-    build: ./client
+    build:
+      context: ./client
+      # Environment variables are being passed in the Dockerfile rather than a .env file
+      # due to how Nuxt handles environment variables
     ports:
       - "3000:3000"
 
