@@ -1,0 +1,13 @@
+/* Dark mode theme */
+:root[data-theme='dark'] {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+}
+
+/* Light mode theme */
+:root[data-theme='light'] {
+    --background-color: #eef7f9;
+    --text-color: #000;
+}
+  
+  

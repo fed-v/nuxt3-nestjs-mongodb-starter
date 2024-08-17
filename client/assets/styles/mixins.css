@@ -1,0 +1,23 @@
+/* Elevations */
+.elevation-1 {
+    box-shadow: var(--elevation-1);
+}
+  
+.elevation-2 {
+    box-shadow: var(--elevation-2);
+}
+
+.elevation-3 {
+    box-shadow: var(--elevation-3);
+}
+
+
+/* Animations */
+.fade-in {
+    animation: fadeIn var(--animation-duration) var(--transition-easing);
+}
+  
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

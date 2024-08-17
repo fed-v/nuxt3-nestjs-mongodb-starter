@@ -1,0 +1,59 @@
+:root {
+
+  /* Color Palette */
+  --primary-color: #39e6d9;
+  --secondary-color: #696c6d;
+  --text-color: #000;
+  --background-color: #eef7f9;
+
+
+  /* Spacing */
+  --spacing-size-base-unit: 16px;
+  
+  --spacing-tiny: calc(0.25 _ var(--spacing-size-base-unit)); 
+  
+  --spacing-2xsmall: calc(0.5 _ var(--spacing-size-base-unit)); 
+  --spacing-xsmall: calc(0.75 _ var(--spacing-size-base-unit)); 
+  --spacing-small: calc(1 _ var(--spacing-size-base-unit)); 
+  
+  --spacing-medium: calc(1.5 _ var(--spacing-size-base-unit)); 
+  
+  --spacing-large: calc(2 _ var(--spacing-size-base-unit)); 
+  --spacing-xlarge: calc(2.5 _ var(--spacing-size-base-unit)); 
+  --spacing-2xlarge: calc(3 _ var(--spacing-size-base-unit)); 
+  --spacing-3xlarge: calc(3.5 _ var(--spacing-size-base-unit)); 
+  
+  --spacing-huge: calc(4 _ var(--spacing-size-base-unit)); 
+  --spacing-xhuge: calc(5 _ var(--spacing-size-base-unit)); 
+  --spacing-2xhuge: calc(6 _ var(--spacing-size-base-unit)); 
+  --spacing-3xhuge: calc(7.5 _ var(--spacing-size-base-unit)); 
+
+
+  /* Transitions and Animations */
+  --transition-duration: 0.3s;
+  --transition-easing: ease-in-out;
+  --animation-duration: 1s;
+
+
+  /* Shadow and Borders */
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+
+
+  /* Elevations */
+  --elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 6px 0px rgba(0, 0, 0, 0.1), 0px 4px 12px 0px rgba(0, 0, 0, 0.05);
+  --elevation-2: 0px 2px 4px 0px rgba(0, 0, 0, 0.12), 0px 3px 12px 0px rgba(0, 0, 0, 0.1), 0px 10px 24px 0px rgba(0, 0, 0, 0.05);
+  --elevation-3: 0px 10px 14px -4px rgba(0, 0, 0, 0.12), 0px 16px 40px 0px rgba(0, 0, 0, 0.08), 0px 18px 56px 20px rgba(0, 0, 0, 0.05);
+
+
+  /* Typography */
+  --font-family: 'YourFont', sans-serif;
+  --font-size-sm: 12px;
+  --font-size-md: 16px;
+  --font-size-lg: 24px;
+
+  
+  /* Fluid Typography */
+  --font-size-base: calc(1rem + (1vw - 0.5rem) * 0.5);
+
+}

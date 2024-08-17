@@ -1,0 +1,7 @@
+:root {
+    --button-bg-color: var(--primary-color);
+    --button-text-color: #fff;
+    --button-border-radius: 4px;
+    --button-padding: var(--space-sm) var(--space-md);
+    --button-hover-bg-color: darken(var(--primary-color), 10%);
+}  
