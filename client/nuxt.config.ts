@@ -6,7 +6,11 @@ export default defineNuxtConfig({
   // https://www.joshwcomeau.com/css/custom-css-reset/
   css: [
     '@/assets/styles/reset.css',
-    '@/assets/styles/index.css',
+    '@/assets/styles/base.css',
+    '@/assets/styles/mixins.css',
+    '@/assets/styles/theme.css',
+    '@/assets/styles/layouts/layout.css',
+    '@/assets/styles/components/buttons.css',
   ],
 
   runtimeConfig: {
