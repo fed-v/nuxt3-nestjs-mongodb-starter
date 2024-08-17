@@ -4,4 +4,18 @@
     --button-border-radius: 4px;
     --button-padding: var(--space-sm) var(--space-md);
     --button-hover-bg-color: darken(var(--primary-color), 10%);
-}  
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-duration) var(--transition-easing);
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--button-bg-color), 10%);
+}

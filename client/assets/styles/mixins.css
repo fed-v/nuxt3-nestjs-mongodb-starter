@@ -21,3 +21,107 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+
+/* Responsive Font Size */
+.responsive-text {
+    font-size: calc(1rem + 0.5vw);
+}
+
+/* Example usage */
+.text-lg {
+    @apply responsive-text;
+}
+
+/* Flex Center */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flex Column */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Flex Space Between */
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Truncate Text */
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Rounded Corners */
+.rounded {
+    border-radius: var(--border-radius);
+}
+
+/* Full Rounded Corners */
+.rounded-full {
+    border-radius: 9999px;
+}
+
+/* Hover Scale */
+.hover-scale {
+    transition: transform var(--transition-duration) var(--transition-easing);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Smooth Transition */
+.smooth-transition {
+    transition: all var(--transition-duration) var(--transition-easing);
+}
+
+/* Aspect Ratio */
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    padding-bottom: calc(var(--aspect-ratio-height) / var(--aspect-ratio-width) * 100%);
+}
+
+.aspect-ratio-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Text Align */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Text Transform */
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
