@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=20.11.0
+ARG API_BASE_URL='http://nestjs:4000'
 
 ################################################################################
 # Set the base image
@@ -15,7 +16,7 @@ ARG API_BASE_URL
 # Set the environment variable 
 # IMPORTANT: This is a build-time environment variable rather than using a .env.docker file like in the NestJS service
 # This is because the environment variable is used in the build stage
-ENV API_BASE_URL='http://nestjs:4000'
+ENV API_BASE_URL=${API_BASE_URL}
 
 
 ################################################################################
@@ -50,7 +51,7 @@ FROM dependencies as build
 # Set the environment variable 
 # IMPORTANT: This is a build-time environment variable rather than using a .env.docker file like in the NestJS service
 # This is because the environment variable is used in the build stage
-ENV API_BASE_URL='http://nestjs:4000'
+ENV API_BASE_URL=${API_BASE_URL}
 
 # Copy the source code
 COPY . .
@@ -69,7 +70,7 @@ FROM base AS production
 # Set the environment variable 
 # IMPORTANT: This is a build-time environment variable rather than using a .env.docker file like in the NestJS service
 # This is because the environment variable is used in the build stage
-ENV API_BASE_URL='http://nestjs:4000'
+ENV API_BASE_URL=${API_BASE_URL}
 
 # Copy the built application
 COPY --from=build /usr/src/app/.output /usr/src/app/.output
