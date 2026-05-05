@@ -10,23 +10,23 @@
   /* Spacing */
   --spacing-size-base-unit: 16px;
   
-  --spacing-tiny: calc(0.25 _ var(--spacing-size-base-unit)); 
+  --spacing-tiny: calc(0.25 * var(--spacing-size-base-unit)); 
   
-  --spacing-2xsmall: calc(0.5 _ var(--spacing-size-base-unit)); 
-  --spacing-xsmall: calc(0.75 _ var(--spacing-size-base-unit)); 
-  --spacing-small: calc(1 _ var(--spacing-size-base-unit)); 
+  --spacing-2xsmall: calc(0.5 * var(--spacing-size-base-unit)); 
+  --spacing-xsmall: calc(0.75 * var(--spacing-size-base-unit)); 
+  --spacing-small: calc(1 * var(--spacing-size-base-unit)); 
   
-  --spacing-medium: calc(1.5 _ var(--spacing-size-base-unit)); 
+  --spacing-medium: calc(1.5 * var(--spacing-size-base-unit)); 
   
-  --spacing-large: calc(2 _ var(--spacing-size-base-unit)); 
-  --spacing-xlarge: calc(2.5 _ var(--spacing-size-base-unit)); 
-  --spacing-2xlarge: calc(3 _ var(--spacing-size-base-unit)); 
-  --spacing-3xlarge: calc(3.5 _ var(--spacing-size-base-unit)); 
+  --spacing-large: calc(2 * var(--spacing-size-base-unit)); 
+  --spacing-xlarge: calc(2.5 * var(--spacing-size-base-unit)); 
+  --spacing-2xlarge: calc(3 * var(--spacing-size-base-unit)); 
+  --spacing-3xlarge: calc(3.5 * var(--spacing-size-base-unit)); 
   
-  --spacing-huge: calc(4 _ var(--spacing-size-base-unit)); 
-  --spacing-xhuge: calc(5 _ var(--spacing-size-base-unit)); 
-  --spacing-2xhuge: calc(6 _ var(--spacing-size-base-unit)); 
-  --spacing-3xhuge: calc(7.5 _ var(--spacing-size-base-unit)); 
+  --spacing-huge: calc(4 * var(--spacing-size-base-unit)); 
+  --spacing-xhuge: calc(5 * var(--spacing-size-base-unit)); 
+  --spacing-2xhuge: calc(6 * var(--spacing-size-base-unit)); 
+  --spacing-3xhuge: calc(7.5 * var(--spacing-size-base-unit)); 
 
 
   /* Transitions and Animations */

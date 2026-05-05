@@ -30,7 +30,7 @@
 
 /* Example usage */
 .text-lg {
-    @apply responsive-text;
+    font-size: calc(1rem + 0.5vw);
 }
 
 /* Flex Center */

@@ -1,48 +1,39 @@
 <template>
     <div>
       <h1>{{ message }}</h1>
+      <p v-if="errorMessage">{{ errorMessage }}</p>
       <pre>{{ users }}</pre>
     </div>
 </template>
   
 <script setup lang="ts">
+  import { onMounted, ref } from 'vue';
+  import { useApi, type ApiError } from '../composables/useApi';
+  import { useUsersApi, type User } from '../composables/useUsersApi';
   
     const message = ref('loading...');
-    const users = ref();
+    const users = ref<User[]>([]);
+    const errorMessage = ref('');
+    const api = useApi();
+    const usersApi = useUsersApi();
   
     // Fetch data from the NestJS API on component mount
     onMounted(async () => {
-  
-      /*try {
-  
-        // Calling the Nest API directly
-  
-        const config = useRuntimeConfig();
-        const response = await fetch(`${config.public.apiBase}/api`);
-        const data = await response.text();
-        message.value = data;
-  
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      }*/
-  
-  
-      // Calling the Nest API via a server route
+
       try {
-        const response = await fetch('/api/fetchHello')
-        const data = await response.json()
-        message.value = data.message
+        message.value = await api.get<string>('/api');
       } catch (error) {
-        console.error('Failed to fetch data:', error)
+        const apiError = error as ApiError;
+        errorMessage.value = apiError.message;
+        console.error('Failed to fetch data:', apiError);
       }
   
-  
       try {
-        const response = await fetch('/api/fetchUsers')
-        const data = await response.json()
-        users.value = data.message
+        users.value = await usersApi.getUsers();
       } catch (error) {
-        console.error('Failed to fetch data:', error)
+        const apiError = error as ApiError;
+        errorMessage.value = apiError.message;
+        console.error('Failed to fetch users:', apiError);
       }
   
     });

@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 
 ################################################################################
 # Create a stage for installing dependecies
-FROM base as dependencies
+FROM base AS dependencies
 
 # Copy the package.json and package-lock.json
 COPY package*.json ./
@@ -23,7 +23,7 @@ RUN npm install
 
 ################################################################################
 # Create a stage for running the application in development mode
-FROM dependencies as development
+FROM dependencies AS development
 
 # Copy the source code
 COPY . .

@@ -21,7 +21,7 @@ ENV API_BASE_URL=${API_BASE_URL}
 
 ################################################################################
 # Create a stage for installing dependencies
-FROM base as dependencies
+FROM base AS dependencies
 
 # Copy the package.json and package-lock.json
 COPY package*.json ./
@@ -32,7 +32,7 @@ RUN npm install
 
 ################################################################################
 # Create a stage for running the application in development mode
-FROM dependencies as development
+FROM dependencies AS development
 
 # Copy the source code
 COPY . .
@@ -46,7 +46,7 @@ CMD [ "npm", "run", "dev" ]
 
 ################################################################################
 # Create a stage for building the application
-FROM dependencies as build
+FROM dependencies AS build
 
 # Set the environment variable 
 # IMPORTANT: This is a build-time environment variable rather than using a .env.docker file like in the NestJS service
