@@ -8,11 +8,50 @@ type ApiRequestOptions = {
   auth?: boolean;
 };
 
+type ApiSuccessResponse<T> = {
+  success: true;
+  data: T;
+  message?: string;
+  timestamp: string;
+  path: string;
+};
+
+type ApiErrorResponse = {
+  success: false;
+  error: {
+    code: string;
+    message: string;
+    details?: unknown;
+  };
+  timestamp: string;
+  path: string;
+};
+
+type LegacyApiErrorResponse = {
+  message?: string | string[];
+  error?: string;
+};
+
 export type ApiError = {
+  code: string;
   status: number;
   message: string;
   details?: unknown;
 };
+
+function isApiErrorResponse(data: unknown): data is ApiErrorResponse {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'success' in data &&
+    data.success === false &&
+    'error' in data
+  );
+}
+
+function isLegacyApiErrorResponse(data: unknown): data is LegacyApiErrorResponse {
+  return typeof data === 'object' && data !== null;
+}
 
 function normalizeApiError(error: unknown): ApiError {
   if (typeof error === 'object' && error !== null) {
@@ -21,24 +60,37 @@ function normalizeApiError(error: unknown): ApiError {
       statusCode?: number;
       statusMessage?: string;
       message?: string;
-      data?: {
-        message?: string | string[];
-        error?: string;
-      };
+      data?: ApiErrorResponse | LegacyApiErrorResponse;
     };
 
-    const message = fetchError.data?.message;
+    if (isApiErrorResponse(fetchError.data)) {
+      return {
+        code: fetchError.data.error.code,
+        status: fetchError.statusCode ?? fetchError.status ?? 500,
+        message: fetchError.data.error.message,
+        details: fetchError.data.error.details,
+      };
+    }
+
+    const message = isLegacyApiErrorResponse(fetchError.data)
+      ? fetchError.data.message
+      : undefined;
+    const legacyError = isLegacyApiErrorResponse(fetchError.data)
+      ? fetchError.data.error
+      : undefined;
 
     return {
+      code: 'API_ERROR',
       status: fetchError.statusCode ?? fetchError.status ?? 500,
       message: Array.isArray(message)
         ? message.join(', ')
-        : message ?? fetchError.data?.error ?? fetchError.statusMessage ?? fetchError.message ?? 'Something went wrong.',
+        : message ?? legacyError ?? fetchError.statusMessage ?? fetchError.message ?? 'Something went wrong.',
       details: fetchError.data,
     };
   }
 
   return {
+    code: 'API_ERROR',
     status: 500,
     message: 'Something went wrong.',
   };
@@ -66,13 +118,15 @@ export function useApi() {
     }
 
     try {
-      return await $fetch<T>(endpoint, {
+      const response = await $fetch<ApiSuccessResponse<T>>(endpoint, {
         baseURL: config.public.apiBase,
         method,
         body: options.body as BodyInit | Record<string, unknown> | null | undefined,
         query: options.query,
         headers,
       });
+
+      return response.data;
     } catch (error) {
       throw normalizeApiError(error);
     }
