@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_VERSION=20.11.0
+ARG NODE_VERSION=20.19.0
 ARG API_BASE_URL='http://nestjs:4000'
 
 ################################################################################

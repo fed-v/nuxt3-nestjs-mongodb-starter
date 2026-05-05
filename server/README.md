@@ -45,6 +45,20 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Seeding the database
+
+Create a local `.env` file from `.env.dist`, set `MONGO_URI`, then run:
+
+```bash
+$ npm run seed
+```
+
+To clear the users collection before inserting the dummy users:
+
+```bash
+$ npm run seed:reset
+```
+
 ## Test
 
 ```bash

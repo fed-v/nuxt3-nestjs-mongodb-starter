@@ -12,6 +12,20 @@ Create and start the development container:
   ```bash
   docker compose up --build -d
   ```
+
+This also runs a one-off seed container that adds a few dummy users to MongoDB. The seed is idempotent, so running it again will update the sample users without creating duplicates.
+
+Manually seed the database:
+
+  ```bash
+  docker compose run --rm seed
+  ```
+
+Reset and reseed the users collection:
+
+  ```bash
+  docker compose run --rm seed npm run seed:reset
+  ```
   
 Stop and remove the development container:
 
