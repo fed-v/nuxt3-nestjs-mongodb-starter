@@ -22,6 +22,9 @@ The backend wraps all successful responses and errors in a shared API format. Co
 
 The backend uses a shared global validation pipe with DTO-based request contracts. Invalid input fails before reaching controller or service logic, unknown fields are rejected, and query params can be transformed into the correct types automatically. This makes future API modules cleaner, safer, and easier to scale.
 
+### 4. Health Check Endpoint**  
+  Dedicated `GET /health` endpoint checks API uptime and MongoDB availability, making the project ready for Docker, deployment health checks, monitoring, and debugging.
+
 ## Docker
 
 Create and start the development container:
