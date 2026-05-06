@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
-import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { ApiExceptionFilter } from './common/filters/api-exception.filter';
 import { ApiResponseInterceptor } from './common/interceptors/api-response.interceptor';
+import { createValidationPipe } from './common/validation/create-validation-pipe';
 
 
 async function bootstrap() {
@@ -18,21 +18,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new ApiExceptionFilter());
   app.useGlobalInterceptors(new ApiResponseInterceptor());
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      exceptionFactory: (errors) =>
-        new BadRequestException({
-          code: 'VALIDATION_ERROR',
-          message: 'Validation failed',
-          details: errors.map((error) => ({
-            field: error.property,
-            errors: Object.values(error.constraints ?? {}),
-          })),
-        }),
-    }),
-  );
+  app.useGlobalPipes(createValidationPipe());
   
   await app.listen(port);
   console.log(`NestJS is running on: ${await app.getUrl()}`);
