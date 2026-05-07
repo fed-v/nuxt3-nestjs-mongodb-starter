@@ -22,8 +22,13 @@ The backend wraps all successful responses and errors in a shared API format. Co
 
 The backend uses a shared global validation pipe with DTO-based request contracts. Invalid input fails before reaching controller or service logic, unknown fields are rejected, and query params can be transformed into the correct types automatically. This makes future API modules cleaner, safer, and easier to scale.
 
-### 4. Health Check Endpoint**  
-  Dedicated `GET /health` endpoint checks API uptime and MongoDB availability, making the project ready for Docker, deployment health checks, monitoring, and debugging.
+### 4. Health Check Endpoint
+
+Dedicated `GET /health` endpoint checks API uptime and MongoDB availability, making the project ready for Docker, deployment health checks, monitoring, and debugging.
+
+### 5. Lightweight Request Logging
+
+The backend includes simple global request logging to make debugging easier during development and production support. Each request logs a request ID, method, path, status code, and duration, while skipping sensitive data such as bodies and auth tokens. Logging is built on Nest’s native logger and can be configured through environment variables.
 
 ## Docker
 

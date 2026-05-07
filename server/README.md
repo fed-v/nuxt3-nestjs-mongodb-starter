@@ -59,6 +59,18 @@ To clear the users collection before inserting the dummy users:
 $ npm run seed:reset
 ```
 
+## Request logging
+
+Request logging is enabled by default and uses Nest's built-in logger. Configure it with:
+
+```bash
+LOG_LEVEL=log
+REQUEST_LOGGING_ENABLED=true
+REQUEST_LOG_EXCLUDE=/health
+```
+
+The logger outputs method, path, status code, duration, and request id. It does not log request bodies or auth headers.
+
 ## Test
 
 ```bash
