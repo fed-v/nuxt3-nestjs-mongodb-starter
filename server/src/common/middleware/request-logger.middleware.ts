@@ -49,7 +49,10 @@ export class RequestLoggerMiddleware implements NestMiddleware {
   }
 
   private isEnabled(): boolean {
-    return this.configService.get<string>('REQUEST_LOGGING_ENABLED', 'true') !== 'false';
+    return (
+      this.configService.get<string>('REQUEST_LOGGING_ENABLED', 'true') !==
+      'false'
+    );
   }
 
   private shouldSkip(url: string): boolean {
@@ -61,7 +64,9 @@ export class RequestLoggerMiddleware implements NestMiddleware {
       .map((excludedPath) => this.normalizePath(excludedPath))
       .filter(Boolean);
 
-    return excludedPaths.some((excludedPath) => normalizedUrl.startsWith(excludedPath));
+    return excludedPaths.some((excludedPath) =>
+      normalizedUrl.startsWith(excludedPath),
+    );
   }
 
   private normalizePath(path: string): string {

@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi } from "./useApi";
 
 export type User = {
   _id: string;
@@ -15,7 +15,8 @@ export function useUsersApi() {
   const api = useApi();
 
   return {
-    getUsers: () => api.get<User[]>('/users'),
-    createUser: (payload: CreateUserPayload) => api.post<User>('/users', payload),
+    getUsers: () => api.get<User[]>("/users"),
+    createUser: (payload: CreateUserPayload) =>
+      api.post<User>("/users", payload),
   };
 }

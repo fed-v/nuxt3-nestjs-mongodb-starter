@@ -1,4 +1,4 @@
-type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type HttpMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
 type ApiRequestOptions = {
   body?: unknown;
@@ -41,20 +41,22 @@ export type ApiError = {
 
 function isApiErrorResponse(data: unknown): data is ApiErrorResponse {
   return (
-    typeof data === 'object' &&
+    typeof data === "object" &&
     data !== null &&
-    'success' in data &&
+    "success" in data &&
     data.success === false &&
-    'error' in data
+    "error" in data
   );
 }
 
-function isLegacyApiErrorResponse(data: unknown): data is LegacyApiErrorResponse {
-  return typeof data === 'object' && data !== null;
+function isLegacyApiErrorResponse(
+  data: unknown,
+): data is LegacyApiErrorResponse {
+  return typeof data === "object" && data !== null;
 }
 
 function normalizeApiError(error: unknown): ApiError {
-  if (typeof error === 'object' && error !== null) {
+  if (typeof error === "object" && error !== null) {
     const fetchError = error as {
       status?: number;
       statusCode?: number;
@@ -80,48 +82,60 @@ function normalizeApiError(error: unknown): ApiError {
       : undefined;
 
     return {
-      code: 'API_ERROR',
+      code: "API_ERROR",
       status: fetchError.statusCode ?? fetchError.status ?? 500,
       message: Array.isArray(message)
-        ? message.join(', ')
-        : message ?? legacyError ?? fetchError.statusMessage ?? fetchError.message ?? 'Something went wrong.',
+        ? message.join(", ")
+        : (message ??
+          legacyError ??
+          fetchError.statusMessage ??
+          fetchError.message ??
+          "Something went wrong."),
       details: fetchError.data,
     };
   }
 
   return {
-    code: 'API_ERROR',
+    code: "API_ERROR",
     status: 500,
-    message: 'Something went wrong.',
+    message: "Something went wrong.",
   };
 }
 
 export function useApi() {
   const config = useRuntimeConfig();
-  const authToken = useCookie<string | null>('auth_token');
+  const authToken = useCookie<string | null>("auth_token");
 
-  async function request<T>(method: HttpMethod, endpoint: string, options: ApiRequestOptions = {}) {
+  async function request<T>(
+    method: HttpMethod,
+    endpoint: string,
+    options: ApiRequestOptions = {},
+  ) {
     const headers = new Headers(options.headers);
 
-    if (!headers.has('Accept')) {
-      headers.set('Accept', 'application/json');
+    if (!headers.has("Accept")) {
+      headers.set("Accept", "application/json");
     }
 
-    if (options.body && !headers.has('Content-Type')) {
-      headers.set('Content-Type', 'application/json');
+    if (options.body && !headers.has("Content-Type")) {
+      headers.set("Content-Type", "application/json");
     }
 
     const token = options.token ?? authToken.value;
 
     if (options.auth !== false && token) {
-      headers.set('Authorization', `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
 
     try {
       const response = await $fetch<ApiSuccessResponse<T>>(endpoint, {
         baseURL: config.public.apiBase,
         method,
-        body: options.body as BodyInit | Record<string, unknown> | null | undefined,
+        body: options.body as
+          | BodyInit
+          | Record<string, unknown>
+          | null
+          | undefined,
         query: options.query,
         headers,
       });
@@ -133,9 +147,13 @@ export function useApi() {
   }
 
   return {
-    get: <T>(endpoint: string, options?: ApiRequestOptions) => request<T>('GET', endpoint, options),
-    post: <T>(endpoint: string, body?: unknown, options?: ApiRequestOptions) => request<T>('POST', endpoint, { ...options, body }),
-    patch: <T>(endpoint: string, body?: unknown, options?: ApiRequestOptions) => request<T>('PATCH', endpoint, { ...options, body }),
-    delete: <T>(endpoint: string, options?: ApiRequestOptions) => request<T>('DELETE', endpoint, options),
+    get: <T>(endpoint: string, options?: ApiRequestOptions) =>
+      request<T>("GET", endpoint, options),
+    post: <T>(endpoint: string, body?: unknown, options?: ApiRequestOptions) =>
+      request<T>("POST", endpoint, { ...options, body }),
+    patch: <T>(endpoint: string, body?: unknown, options?: ApiRequestOptions) =>
+      request<T>("PATCH", endpoint, { ...options, body }),
+    delete: <T>(endpoint: string, options?: ApiRequestOptions) =>
+      request<T>("DELETE", endpoint, options),
   };
 }

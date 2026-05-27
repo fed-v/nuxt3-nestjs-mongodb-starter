@@ -7,7 +7,6 @@ import { UserModule } from './modules/user/user.module';
 import { HealthModule } from './modules/health/health.module';
 import { RequestLoggerMiddleware } from './common/middleware/request-logger.middleware';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({

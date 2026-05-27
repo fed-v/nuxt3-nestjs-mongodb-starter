@@ -6,7 +6,6 @@ import { ApiResponseInterceptor } from './common/interceptors/api-response.inter
 import { getLogLevels } from './common/logging/get-log-levels';
 import { createValidationPipe } from './common/validation/create-validation-pipe';
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: getLogLevels(),
@@ -22,7 +21,7 @@ async function bootstrap() {
   app.useGlobalFilters(new ApiExceptionFilter());
   app.useGlobalInterceptors(new ApiResponseInterceptor());
   app.useGlobalPipes(createValidationPipe());
-  
+
   await app.listen(port);
   console.log(`NestJS is running on: ${await app.getUrl()}`);
 }

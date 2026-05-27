@@ -10,9 +10,10 @@ import { Request } from 'express';
 import { ApiSuccessResponse } from '../interfaces/api-response.interface';
 
 @Injectable()
-export class ApiResponseInterceptor<T>
-  implements NestInterceptor<T, ApiSuccessResponse<T>>
-{
+export class ApiResponseInterceptor<T> implements NestInterceptor<
+  T,
+  ApiSuccessResponse<T>
+> {
   intercept(
     context: ExecutionContext,
     next: CallHandler,

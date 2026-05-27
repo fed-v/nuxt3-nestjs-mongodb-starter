@@ -1,4 +1,8 @@
-import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common';
+import {
+  BadRequestException,
+  ValidationError,
+  ValidationPipe,
+} from '@nestjs/common';
 
 type ValidationErrorDetail = {
   field: string;
@@ -10,7 +14,9 @@ function formatValidationErrors(
   parentPath = '',
 ): ValidationErrorDetail[] {
   return errors.flatMap((error) => {
-    const field = parentPath ? `${parentPath}.${error.property}` : error.property;
+    const field = parentPath
+      ? `${parentPath}.${error.property}`
+      : error.property;
     const currentErrors = Object.values(error.constraints ?? {});
     const childErrors = formatValidationErrors(error.children ?? [], field);
 
